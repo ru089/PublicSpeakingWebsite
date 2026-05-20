@@ -187,9 +187,13 @@
   </div>
   <div class="video-container">
     <div class="video-wrapper">
-      <video id="mainVideo" preload="metadata" playsinline><source src="resource/ourvideo.mp4" type="video/mp4">Your browser does not support the video tag.</video>
-      <div class="video-placeholder" id="videoOverlay"><i class="fas fa-play-circle play-btn-lg"></i><span style="font-weight:700; font-size:1.2rem; text-transform:uppercase; letter-spacing:1px;">Watch Our Video</span></div>
-    </div>
+	  <iframe 
+		src="https://drive.google.com/file/d/1v3vT3-oKYYJn7XfXaDnBaVpbYuqXUmPo/preview" 
+		allow="autoplay" 
+		allowfullscreen 
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
+	  </iframe>
+	</div>
   </div>
 </section>
 
@@ -260,14 +264,7 @@
 </footer>
 
 <script>
-  const mainVideo = document.getElementById('mainVideo');
-  const videoOverlay = document.getElementById('videoOverlay');
-  videoOverlay.addEventListener('click', () => { mainVideo.play(); videoOverlay.style.display = 'none'; });
-  mainVideo.addEventListener('pause', function() { if (!this.ended) videoOverlay.style.display = 'flex'; });
-  mainVideo.addEventListener('ended', function() { videoOverlay.style.display = 'flex'; });
-  mainVideo.addEventListener('play', function() { videoOverlay.style.display = 'none'; });
 
-  // ИЗМЕНЕНО: Добавлен массив videos с официальными ссылками TED
   const navigatorData = {
     en: {
       anxiety: {
