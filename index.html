@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Public Speech Improvement Navigator | Tyumen State University</title>
+  <meta name="description" content="A research project by Tyumen State University to improve public speaking skills using data-driven methods.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --bg-body: #f8f9fa;
+      --bg-card: #ffffff;
+      --bg-nav: rgba(255, 255, 255, 0.95);
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --accent: #004e92;
+      --accent-dark: #003366;
+      --accent-light: #e6f0fa;
+      --border-color: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius-xl: 1.5rem;
+      --radius-md: 1rem;
+    }
+
+    body.dark-mode {
+      --bg-body: #111827;
+      --bg-card: #1f2937;
+      --bg-nav: rgba(17, 24, 39, 0.95);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #3b82f6; 
+      --accent-dark: #60a5fa;
+      --accent-light: #374151;
+      --border-color: #374151;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .logo {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
+    .navbar {
+      background: var(--bg-nav);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100; padding: 1rem 0;
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .nav-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .brand-area { display: flex; align-items: center; gap: 1rem; }
+    .uni-logo { height: 50px; width: auto; object-fit: contain; }
+    .logo { font-weight: 800; font-size: 1.4rem; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem; }
+    .logo i { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; font-weight: 600; font-size: 0.9rem; color: var(--text-main); transition: 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .controls-group { display: flex; align-items: center; gap: 1rem; }
+    .lang-switch { display: flex; gap: 0.3rem; background: var(--accent-light); padding: 0.2rem; border-radius: 9999px; }
+    .lang-btn { background: none; border: none; font-weight: 700; cursor: pointer; font-size: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 9999px; transition: all 0.3s ease; color: var(--text-muted); }
+    .lang-btn.active { background: var(--bg-card); color: var(--accent); box-shadow: var(--shadow-sm); }
+    .theme-toggle { background: none; border: none; cursor: pointer; color: var(--text-main); font-size: 1.2rem; transition: 0.3s; }
+    .theme-toggle:hover { color: var(--accent); transform: rotate(15deg); }
+
+    .hero {
+      position: relative; min-height: 90vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, var(--bg-body) 0%, var(--accent-light) 100%);
+      padding: 4rem 0; overflow: hidden;
+    }
+    .hero::before { content: ''; position: absolute; top: -10%; right: -10%; width: 50%; height: 120%; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); opacity: 0.08; z-index: 0; filter: blur(80px); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+    .hero-text { max-width: 600px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0, 78, 146, 0.1); color: var(--accent-dark); padding: 0.4rem 1rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.5rem; border: 1px solid rgba(0, 78, 146, 0.2); }
+    .hero-text h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; color: var(--text-main); }
+    .hero-text h1 span { color: var(--accent); }
+    .hero-text p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem; font-weight: 400; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: white; padding: 1rem 2.5rem; border-radius: 9999px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(0, 78, 146, 0.4); border: none; cursor: pointer; font-size: 1rem; letter-spacing: 0.5px; }
+    .btn:hover { transform: translateY(-3px); background: var(--accent-dark); box-shadow: 0 20px 25px -5px rgba(0, 78, 146, 0.5); }
+    .hero-image-wrapper img { width: 100%; height: auto; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); object-fit: cover; aspect-ratio: 4/3; transform: rotate(-2deg); border: 8px solid rgba(255,255,255,0.3); }
+
+    .video-section { padding: 6rem 0; }
+    .video-container { max-width: 900px; margin: 0 auto; position: relative; background: var(--bg-card); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); }
+    .video-wrapper { position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden; }
+    .video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: rgba(0,0,0,0.5); color: white; cursor: pointer; transition: 0.3s; z-index: 2; }
+    .video-placeholder:hover { background: rgba(0,0,0,0.3); }
+    .play-btn-lg { font-size: 5rem; color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.6); margin-bottom: 1rem; transition: 0.3s; }
+    .video-placeholder:hover .play-btn-lg { transform: scale(1.1); color: var(--accent); }
+
+    section { padding: 8rem 0; }
+    .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-main); }
+    .section-sub { color: var(--text-muted); font-size: 1.15rem; max-width: 700px; }
+
+    .glass-card { background: var(--bg-card); border-radius: var(--radius-xl); padding: 3rem; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: 100%; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+
+    .stat-card { background: var(--bg-card); padding: 2.5rem; border-radius: 1rem; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+    .progress-bg { background: var(--accent-light); border-radius: 10px; height: 8px; width: 100%; margin-top: 1rem; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; border-radius: 10px; transition: width 1.5s ease-out; width: 0; }
+
+    .navigator-wrapper { background: var(--bg-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); overflow: hidden; display: grid; grid-template-columns: 300px 1fr; min-height: 800px; }
+    .nav-sidebar { background: var(--bg-card); padding: 2rem 1rem; border-right: 1px solid var(--border-color); z-index: 2; overflow-y: auto; max-height: 850px; }
+    .nav-btn { display: flex; align-items: flex-start; gap: 1rem; width: 100%; padding: 1rem; margin-bottom: 0.5rem; border: none; background: transparent; color: var(--text-muted); font-weight: 600; text-align: left; cursor: pointer; border-radius: 0.8rem; transition: all 0.2s; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; line-height: 1.3; }
+    .nav-btn:hover { background: var(--accent-light); color: var(--accent-dark); }
+    .nav-btn.active { background: var(--accent); color: white; box-shadow: var(--shadow-sm); }
+    .nav-btn i { margin-top: 3px; }
+    
+    /* ИЗМЕНЕНО: Убран ::before, фон настраивается через JS и CSS-градиент */
+    .nav-content-area {
+      position: relative; padding: 3.5rem; overflow-y: auto; color: var(--text-main);
+      transition: background-color 0.3s ease-in-out, background-image 0.5s ease-in-out; 
+      background-size: cover; background-position: center; z-index: 1; max-height: 850px;
+      background-color: var(--bg-card); /* Запасной цвет, если картинка не загрузится */
+    }
+
+    .research-box { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-left: 5px solid var(--accent); padding: 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    body.dark-mode .research-box { background: rgba(0,0,0,0.3); }
+
+    .plan-header { margin-bottom: 2.5rem; position: relative; z-index: 2; }
+    .plan-section { margin-bottom: 2.5rem; position: relative; z-index: 2; }
+    .plan-section h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .checklist { list-style: none; }
+    .checklist li { margin-bottom: 1rem; padding-left: 2rem; position: relative; color: var(--text-main); font-weight: 500; font-size: 1.05rem; }
+    .checklist li::before { content: '\f00c'; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: 2px; color: var(--accent); font-size: 1rem; }
+    .scholar-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.8rem; font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 0.4rem 0.8rem; border-radius: 0.5rem; transition: 0.2s; }
+    .scholar-link:hover { background: var(--accent); color: white; }
+
+    .nav-content-image { border-radius: 1rem; overflow: hidden; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .nav-content-image img { width: 100%; height: auto; display: block; max-height: 350px; object-fit: cover; }
+
+    .video-user-placeholder { background: #e5e7eb; border: 2px dashed #9ca3af; border-radius: 1rem; padding: 3rem; text-align: center; color: #6b7280; margin-top: 1rem; }
+    body.dark-mode .video-user-placeholder { border-color: #4b5563; color: #9ca3af; background: #374151; }
+
+    .resource-card { background: var(--bg-card); border-radius: 1rem; padding: 2.5rem; border: 1px solid var(--border-color); transition: transform 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+    .resource-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .resource-card i { font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem; }
+    .resource-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: 700; }
+    .btn-outline { display: inline-block; background: transparent; color: var(--accent); border: 2px solid var(--accent); padding: 0.6rem 1.5rem; border-radius: 9999px; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: 0.2s; cursor: pointer; text-align: center; margin-top: 1.5rem; }
+    .btn-outline:hover { background: var(--accent); color: white; }
+    .resource-list { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; margin-top: 1.5rem; list-style: none; }
+    .resource-list.show { max-height: 300px; }
+    .resource-list li { margin-bottom: 0.8rem; font-size: 0.95rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+    .resource-list a { color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
+    .resource-list a:hover { color: var(--accent); }
+
+    footer { background: #000000; color: #aeb4b0; padding: 5rem 0; margin-top: 8rem; text-align: center; border-top: 4px solid var(--accent); }
+    .footer-link { color: var(--accent); text-decoration: none; font-weight: 600; border-bottom: 1px dashed var(--accent); }
+    .footer-link:hover { color: white; border-bottom-style: solid; }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+      .hero-text { margin: 0 auto; }
+      .hero-image-wrapper { max-width: 500px; margin: 0 auto; }
+      .navigator-wrapper { grid-template-columns: 1fr; min-height: auto; }
+      .nav-sidebar { display: flex; overflow-x: auto; padding: 1rem; border-right: none; border-bottom: 1px solid var(--border-color); max-height: none; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+      .nav-sidebar::-webkit-scrollbar { display: none; }
+      .nav-sidebar { -ms-overflow-style: none; scrollbar-width: none; }
+      .nav-btn { width: auto; white-space: nowrap; margin-bottom: 0; margin-right: 0.5rem; flex-shrink: 0; }
+      .nav-content-area { padding: 2rem; min-height: 500px; max-height: none; }
+      .uni-logo { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-flex">
+    <div class="brand-area">
+      <img src="https://z-cdn-media.chatglm.cn/files/6fc66ac9-7b91-4ea5-8de4-b448dbefb6c0.png?auth_key=1879224238-935c042377b8486bb0d960c8bc5f509e-0-572997eea9b3d35b4b1b774d9b798019"
+           alt="UTMN Logo" class="uni-logo"
+           onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/ru/e/e7/Logo_UTMN.png';">
+      <div class="logo"><i class="fas fa-chalkboard-user"></i> SpeechNavigator</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#problem" data-i18n="nav_problem">Problem</a></li>
+      <li><a href="#research" data-i18n="nav_research">Research</a></li>
+      <li><a href="#navigator" data-i18n="nav_navigator">Navigator</a></li>
+      <li><a href="#resources" data-i18n="nav_resources">Resources</a></li>
+    </ul>
+    <div class="controls-group">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-grid reveal">
+    <div class="hero-text">
+      <span class="hero-badge"><i class="fas fa-university"></i> <span data-i18n="hero_badge">UTMN Project 2026</span></span>
+      <h1 data-i18n="hero_title">Master Public Speaking with <span>Improvement</span> Navigator</h1>
+      <p data-i18n="hero_desc">A personalized navigator that transforms fear into confidence. Built on real student data and proven oratory frameworks.</p>
+      <a href="#navigator" class="btn"><i class="fas fa-compass"></i> <span data-i18n="hero_btn">Start Navigation</span></a>
+    </div>
+    <div class="hero-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200&auto=format&fit=crop" alt="Powerful public speaker" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1200&auto=format&fit=crop';">
+    </div>
+  </div>
+</section>
+
+<section id="project-video" class="container video-section reveal">
+  <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
+    <h2 class="section-title" data-i18n="project_video_title">Project Overview</h2>
+    <p class="section-sub" style="margin:0 auto;" data-i18n="project_video_desc">We recommend watching this video, which provides a basic overview of public speaking.</p>
+  </div>
+  <div class="video-container">
+    <div class="video-wrapper">
+      <video id="mainVideo" preload="metadata" playsinline><source src="resource/ourvideo.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+      <div class="video-placeholder" id="videoOverlay"><i class="fas fa-play-circle play-btn-lg"></i><span style="font-weight:700; font-size:1.2rem; text-transform:uppercase; letter-spacing:1px;">Watch Our Video</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="problem" class="container">
+  <div class="glass-card reveal">
+    <div class="grid-2">
+      <div><h2 class="section-title" data-i18n="prob1_title">Information Overload</h2><p style="font-size:1.1rem; color:var(--text-muted)" data-i18n="prob1_text">Hundreds of conflicting theories, but no clear roadmap tailored to your specific skill level.</p></div>
+      <div><h2 class="section-title" data-i18n="prob2_title">Lack of Feedback</h2><p style="font-size:1.1rem; color:var(--text-muted)" data-i18n="prob2_text">Without a mentor, it is hard to diagnose weak spots like structure, voice modulation, or anxiety triggers.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="research" class="container reveal" style="padding: 12rem 0;">
+  <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+    <h2 class="section-title" data-i18n="research_title">Research Methodology</h2>
+    <p class="section-sub" data-i18n="research_desc">We conducted a survey on this topic and also reviewed Google Scholar articles. The results were rather interesting.</p>
+  </div>
+</section>
+
+<section id="survey-insights" class="container">
+  <div class="glass-card reveal">
+    <h2 class="section-title" style="text-align:center;" data-i18n="survey_title">Key Findings</h2>
+    <div class="grid-4" style="margin-top: 3rem;">
+      <div class="stat-card"><div class="stat-number" data-target="75" data-suffix="%">0%</div><div style="font-weight:700;" data-i18n="stat_structure">Structure Issues</div><div class="progress-bg"><div class="progress-fill" data-width="75%"></div></div></div>
+      <div class="stat-card"><div class="stat-number" data-target="50" data-suffix="%">0%</div><div style="font-weight:700;" data-i18n="stat_anxiety">Speech Anxiety</div><div class="progress-bg"><div class="progress-fill" data-width="50%"></div></div></div>
+      <div class="stat-card"><div class="stat-number" data-target="38" data-suffix="%">0%</div><div style="font-weight:700;" data-i18n="stat_impromptu">Impromptu Fears</div><div class="progress-bg"><div class="progress-fill" data-width="38%"></div></div></div>
+      <div class="stat-card"><div class="stat-number" data-target="3.9" data-suffix="/5">0/5</div><div style="font-weight:700;" data-i18n="stat_confidence">Avg. Confidence</div><div class="progress-bg"><div class="progress-fill" data-width="78%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="navigator" class="container" style="padding-top: 12rem;">
+  <div style="text-align: center; margin-bottom: 3rem;">
+    <h2 class="section-title reveal" data-i18n="nav_title">Personal Speech Navigator</h2>
+    <p class="section-sub reveal" data-i18n="nav_sub">Select your main difficulty to get a science-backed solution.</p>
+  </div>
+  <div class="navigator-wrapper reveal">
+    <div class="nav-sidebar">
+      <button class="nav-btn active" data-nav="anxiety"><i class="fas fa-brain"></i> <div><span data-i18n="btn_anxiety">Anxiety / Fear</span><br><span data-i18n="btn_anxiety_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
+      <button class="nav-btn" data-nav="structure"><i class="fas fa-layer-group"></i> <div><span data-i18n="btn_structure">Logical Structure</span><br><span data-i18n="btn_structure_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
+      <button class="nav-btn" data-nav="voice"><i class="fas fa-microphone-alt"></i> <div><span data-i18n="btn_voice">Voice Control</span><br><span data-i18n="btn_voice_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
+      <button class="nav-btn" data-nav="body"><i class="fas fa-child-reaching"></i> <div><span data-i18n="btn_body">Body Language</span><br><span data-i18n="btn_body_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
+      <button class="nav-btn" data-nav="impromptu"><i class="fas fa-bolt"></i> <div><span data-i18n="btn_impromptu">Impromptu & Q&A</span><br><span data-i18n="btn_impromptu_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
+      <button class="nav-btn" data-nav="feedback"><i class="fas fa-clipboard-check"></i> <div><span data-i18n="btn_feedback">Getting Feedback</span><br><span data-i18n="btn_feedback_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
+    </div>
+    <div class="nav-content-area" id="navContent"></div>
+  </div>
+</section>
+
+<section id="resources" class="container" style="padding-top: 12rem;">
+  <h2 class="section-title reveal" data-i18n="res_title">Resource Library</h2>
+  <div class="grid-4" style="margin-top: 3rem;">
+    <div class="resource-card reveal"><i class="fas fa-video"></i><h3 data-i18n="res1_title">Analysis</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://www.youtube.com/c/CharismaonCommand" target="_blank"><i class="fab fa-youtube"></i> Charisma on Command</a></li><li><a href="https://www.ted.com/talks" target="_blank"><i class="fab fa-youtube"></i> TED Talks Official</a></li></ul></div>
+    <div class="resource-card reveal"><i class="fas fa-file-pdf"></i><h3 data-i18n="res2_title">Templates</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="#" target="_blank"><i class="fas fa-file-alt"></i> PREP Framework PDF</a></li><li><a href="#" target="_blank"><i class="fas fa-file-alt"></i> Monroe's Motivated Sequence</a></li></ul></div>
+    <div class="resource-card reveal"><i class="fas fa-users"></i><h3 data-i18n="res3_title">Communities</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://www.toastmasters.org" target="_blank"><i class="fas fa-globe"></i> Toastmasters Int.</a></li><li><a href="https://www.meetup.com" target="_blank"><i class="fas fa-users"></i> Meetup Groups</a></li></ul></div>
+    <div class="resource-card reveal"><i class="fas fa-robot"></i><h3 data-i18n="res4_title">AI Tools</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://www.yoodli.ai" target="_blank"><i class="fas fa-link"></i> Yoodli AI</a></li><li><a href="https://www.orai.com" target="_blank"><i class="fas fa-link"></i> Orai App</a></li></ul></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <i class="fas fa-university" style="color:var(--accent); font-size:2rem; margin-bottom:1.5rem;"></i>
+    <h3 style="font-size:1.5rem; color:white; margin-bottom:1rem;">Tyumen State University</h3>
+    <p data-i18n="footer_text">Public Speech Improvement Navigator — A research project based on student survey data.</p>
+    <div style="margin-top: 2rem;"><a href="mailto:vd089@yandex.ru" class="footer-link"><i class="fas fa-envelope"></i> vd089@yandex.ru</a></div>
+    <p style="font-size:0.85rem; opacity:0.5; margin-top:3rem;">© 2026 | UTMN Research Prototype</p>
+  </div>
+</footer>
+
+<script>
+  const mainVideo = document.getElementById('mainVideo');
+  const videoOverlay = document.getElementById('videoOverlay');
+  videoOverlay.addEventListener('click', () => { mainVideo.play(); videoOverlay.style.display = 'none'; });
+  mainVideo.addEventListener('pause', function() { if (!this.ended) videoOverlay.style.display = 'flex'; });
+  mainVideo.addEventListener('ended', function() { videoOverlay.style.display = 'flex'; });
+  mainVideo.addEventListener('play', function() { videoOverlay.style.display = 'none'; });
+
+  const navigatorData = {
+    en: {
+      anxiety: {
+        title: "Overcoming Anxiety & Fear",
+        desc: "Physiological and cognitive techniques to manage stage fright.",
+        bg: "images/nav-anxiety.jpg",
+        insight: "Cognitive Behavioral Therapy (Anderson et al., 2005): Reappraising anxiety and gradual exposure to speaking situations effectively reduce stage fright by rewiring the brain's fear response.",
+        scholar: "https://scholar.google.com/scholar?q=Cognitive+behavioral+therapy+for+public-speaking+anxiety+delivered+via+virtual+reality+Anderson+2005",
+        steps: [
+          "Use cognitive reappraisal: tell yourself \"I am excited\" instead of \"I am calm\" to reframe physiological arousal as a resource, not a threat.",
+          "Implement gradual exposure: start by presenting to 1-2 trusted peers before facing a large audience to desensitize the fear response.",
+          "Challenge catastrophic thoughts: ask yourself \"What is the worst that can realistically happen?\" and rationally evaluate the actual risk.",
+          "Practice the opening 5 times in a row without stopping to build \"muscle memory\" as a safety anchor."
+        ]
+      },
+      structure: {
+        title: "Building Logical Structure",
+        desc: "Frameworks to organize thoughts coherently.",
+        bg: "images/nav-structure.jpg",
+        insight: "Presentation Structure (Bourne, 2007): The human brain struggles with unstructured information. Limiting arguments to key points and using explicit transitions drastically reduces cognitive load and improves audience retention.",
+        scholar: "https://scholar.google.com/scholar?q=Ten+Simple+Rules+for+Making+Good+Oral+Presentations+Bourne+2007",
+        steps: [
+          "Follow the \"Rule of Three\": structure your presentation into a clear Introduction, Body (max 3 key points), and Conclusion to respect cognitive limits.",
+          "Use explicit signposting: verbally guide the audience by saying \"Moving to the second point...\" or \"To summarize...\" to reduce their cognitive load.",
+          "Open with a hook and close with a specific Call to Action (CTA) to give your structure a clear, memorable purpose.",
+          "Practice the 10-minute rule: divide longer speeches into distinct, digestible segments to maintain audience attention."
+        ]
+      },
+      voice: {
+        title: "Fixing Voice Issues",
+        desc: "Overcoming monotony, fast pacing, and low volume.",
+        bg: "images/nav-voice.jpg",
+        insight: "Paralinguistics Research (Cutler et al., 1997): Variation in pitch (intonation) and pausing is crucial for prosody. Monotone speech fails to mark important information, leading to listener disengagement.",
+        scholar: "https://scholar.google.com/scholar?q=Prosody+in+the+comprehension+of+spoken+language:+A+literature+review+Cutler+1997",
+        steps: [
+          "Mark up your script: highlight key words and add pause marks (slash lines) to plan your prosody and intonation in advance.",
+          "Use the \"Power Pause\": stop for 2-3 seconds after a critical point to let the audience process the information, utilizing prosodic boundaries.",
+          "Vary your pitch intentionally: raise pitch slightly to signal a new idea, and lower it to convey authority on important statements.",
+          "Avoid the \"up-talk\" pattern (raising pitch at the end of declarative sentences), as it signals uncertainty and undermines comprehension."
+        ]
+      },
+      body: {
+        title: "Controlling Body Language",
+        desc: "Mastering eye contact, gestures, and posture.",
+        bg: "images/nav-body.jpg",
+        image: "images/body-inside.jpg",
+        insight: "Gesture Cognition (Pouw et al., 2014): Gestures are not just visual aids for the audience; they actively help the speaker think. Open, expressive gestures reduce the speaker's cognitive load and significantly improve the audience's comprehension.",
+        scholar: "https://scholar.google.com/scholar?q=Toward+a+more+embedded+extended+perspective+on+the+cognitive+function+of+gestures+Pouw+2014",
+        steps: [
+          "Use representational gestures: let your hands visually map out spatial or logical relationships (e.g., left hand for the past, right for the future) to aid audience comprehension.",
+          "Don't suppress your natural hand movements: gesturing reduces your own cognitive load, actively helping you think and recall words faster.",
+          "Maintain an open posture (visible palms) to signal trust and reduce the psychological distance between you and the audience.",
+          "Synchronize gestures with speech: ensure your hand movements coincide exactly with the words they emphasize to reinforce the message."
+        ]
+      },
+      impromptu: {
+        title: "Impromptu & Q&A Mastery",
+        desc: "Structuring answers on the fly.",
+        bg: "images/nav-impromptu.jpg",
+        insight: "Choking Under Pressure (Beilock & Carr, 2005): Under stress, working memory is overloaded, causing \"choking.\" Using mental frameworks (heuristics) bypasses this limitation, allowing the brain to generate content automatically without conscious effort.",
+        scholar: "https://scholar.google.com/scholar?q=When+high-powered+people+fail:+Working+memory+and+choking+under+pressure+Beilock+Carr+2005",
+        steps: [
+          "Rely on mental heuristics: memorize 2-3 structural frameworks (e.g., PREP, Past-Present-Future) so your brain can auto-pilot the structure when working memory fails.",
+          "Buy processing time: repeat the question aloud or take a deliberate pause to offload working memory while formulating your first point.",
+          "Limit your answer to 3 points max: this prevents working memory overload that causes rambling and \"choking under pressure.\"",
+          "Practice under mild stress: rehearse impromptu answers while slightly elevated heart rate to train your brain to function despite physiological arousal."
+        ]
+      },
+      feedback: {
+        title: "Getting Constructive Feedback",
+        desc: "Diagnosing errors through external review.",
+        bg: "nav-feedback.jpg",
+        insight: "The Power of Feedback (Hattie & Timperley, 2007): Vague praise like \"good job\" is ineffective. Improvement requires specific, immediate feedback focused on the task (e.g., \"your voice was too quiet\"), which helps bridge the gap between current and desired performance.",
+        scholar: "https://scholar.google.com/scholar?q=The+power+of+feedback+Hattie+Timperley+2007",
+        steps: [
+          "Ask the 3 feedback questions: \"Where am I going?\" (goals), \"How am I going?\" (progress), and \"Where to next?\" (next steps) to guide your reviewer.",
+          "Demand task-specific feedback: instead of \"Was it good?\", ask \"Did I make eye contact during the second argument?\" to get actionable data.",
+          "Avoid ego-driven feedback: separate your self-worth from the performance; focus purely on how the specific task can be improved.",
+          "Record and review immediately: watch your video right after speaking while the context is fresh to give yourself objective, task-level feedback."
+        ]
+      }
+    },
+    ru: {
+      anxiety: {
+        title: "Преодоление страха и волнения",
+        desc: "Физиологические и когнитивные техники управления сценическим волнением.",
+        bg: "images/nav-anxiety.jpg",
+        insight: "Когнитивно-поведенческая терапия (Anderson et al., 2005): Переоценка тревоги и постепенное воздействие ситуаций выступления эффективно снижают страх сцены, перепрограммируя реакцию мозга на стресс.",
+        scholar: "https://scholar.google.com/scholar?q=Cognitive+behavioral+therapy+for+public-speaking+anxiety+delivered+via+virtual+reality+Anderson+2005",
+        steps: [
+          "Используйте когнитивную переоценку: скажите себе «Я в предвкушении», а не «Я спокоен», чтобы переосмыслить физиологическое возбуждение как ресурс, а не угрозу.",
+          "Применяйте постепенную экспозицию: начните с выступления перед 1-2 доверенными людьми, прежде чем выходить к большой аудитории, чтобы снизить чувствительность к стрессу.",
+          "Бросьте вызов катастрофическим мыслям: спросите себя «Что самое худшее может реально произойти?» и рационально оцените действительный риск.",
+          "Отрепетируйте начало 5 раз подряд без остановок, чтобы создать «мышечную память» как якорь безопасности."
+        ]
+      },
+      structure: {
+        title: "Построение логической структуры",
+        desc: "Методики для связного изложения мыслей.",
+        bg: "images/nav-structure.jpg",
+        insight: "Структура презентации (Bourne, 2007): Мозг человека с трудом справляется с неструктурированной информацией. Ограничение аргументов до ключевых пунктов и использование навигационных фраз радикально снижают когнитивную нагрузку и улучшают запоминание.",
+        scholar: "https://scholar.google.com/scholar?q=Ten+Simple+Rules+for+Making+Good+Oral+Presentations+Bourne+2007",
+        steps: [
+          "Следуйте «Правилу трёх»: структурируйте выступление на чёткое Введение, Основную часть (максимум 3 ключевых тезиса) и Заключение, чтобы уважать когнитивные лимиты.",
+          "Используйте явные навигационные фразы: словесно направляйте аудиторию, говоря «Переходя ко второму пункту...» или «Подводя итог...», чтобы снизить её когнитивную нагрузку.",
+          "Начните с привлечения внимания и завершите конкретным Призывом к действию (CTA), чтобы придать структуре чёткую, запоминающуюся цель.",
+          "Соблюдайте «правило 10 минут»: делите длинные речи на отдельные, легко усваиваемые сегменты, чтобы поддерживать внимание аудитории."
+        ]
+      },
+      voice: {
+        title: "Исправление проблем с голосом",
+        desc: "Преодоление монотонности, быстрого темпа и тихого звучания.",
+        bg: "images/nav-voice.jpg",
+        insight: "Исследования паралингвистики (Cutler et al., 1997): Вариативность тона (интонации) и паузы критически важны для просодии. Монотонная речь не выделяет важную информацию, что ведет к потере внимания слушателей.",
+        scholar: "https://scholar.google.com/scholar?q=Prosody+in+the+comprehension+of+spoken+language:+A+literature+review+Cutler+1997",
+        steps: [
+          "Разметьте свой текст: выделите ключевые слова и добавьте отметки пауз (черточки), чтобы заранее спланировать просодию и интонацию.",
+          "Используйте «Силовую паузу»: остановитесь на 2-3 секунды после важной мысли, чтобы аудитория успела усвоить информацию, используя просодические границы.",
+          "Осознанно варьируйте тон: слегка повышайте голос, чтобы сигнализировать о новой идее, и понижайте его для придания веса важным утверждениям.",
+          "Избегайте интонации вопроса в конце утвердительных предложений (когда голос идёт вверх), так как это сигнализирует о неуверенности и мешает восприятию."
+        ]
+      },
+      body: {
+        title: "Контроль языка тела",
+        desc: "Мастерство зрительного контакта, жестов и осанки.",
+        bg: "images/nav-body.jpg",
+        image: "images/body-inside.jpg",
+        insight: "Когнитивная функция жестов (Pouw et al., 2014): Жесты — это не просто визуальное подспорье для аудитории; они активно помогают спикеру думать. Открытые, выразительные жесты снижают когнитивную нагрузку говорящего и значительно улучшают понимание аудитории.",
+        scholar: "https://scholar.google.com/scholar?q=Toward+a+more+embedded+extended+perspective+on+the+cognitive+function+of+gestures+Pouw+2014",
+        steps: [
+          "Используйте изобразительные жесты: позвольте рукам визуально отображать пространственные или логические связи (например, левая рука — прошлое, правая — будущее), чтобы помочь аудитории понять.",
+          "Не подавляйте естественные движения рук: жестикуляция снижает вашу собственную когнитивную нагрузку, активно помогая вам думать и вспоминать слова быстрее.",
+          "Поддерживайте открытую позу (видимые ладони), чтобы сигнализировать о доверии и сократить психологическую дистанцию между вами и аудиторией.",
+          "Синхронизируйте жесты с речью: убедитесь, что движения рук совпадают именно с теми словами, которые они подчёркивают, для усиления сообщения."
+        ]
+      },
+      impromptu: {
+        title: "Импровизация и ответы на вопросы",
+        desc: "Структурирование ответов на ходу.",
+        bg: "images/nav-impromptu.jpg",
+        insight: "Стресс и рабочая память (Beilock & Carr, 2005): В условиях стресса рабочая память перегружается, вызывая «ступор». Использование ментальных фреймворков (эвристик) обходит это ограничение, позволяя мозгу генерировать контент автоматически без сознательных усилий.",
+        scholar: "https://scholar.google.com/scholar?q=When+high-powered+people+fail:+Working+memory+and+choking+under+pressure+Beilock+Carr+2005",
+        steps: [
+          "Опирайтесь на ментальные эвристики: запомните 2-3 структурных фреймворка (например, PREP, Прошлое-Настоящее-Будущее), чтобы мозг работал на автопилоте, когда рабочая память отказывает.",
+          "Выиграйте время на обработку: повторите вопрос вслух или сделайте намеренную паузу, чтобы разгрузить рабочую память, формулируя первый пункт.",
+          "Ограничьте ответ максимум 3 пунктами: это предотвращает перегрузку рабочей памяти, которая приводит к уходу от темы и «ступору под давлением».",
+          "Тренируйтесь в условиях лёгкого стресса: репетируйте спонтанные ответы при слегка повышенном пульсе, чтобы приучить мозг работать вопреки физиологическому возбуждению."
+        ]
+      },
+      feedback: {
+        title: "Получение конструктивной обратной связи",
+        desc: "Диагностика ошибок через внешний обзор.",
+        bg: "nav-feedback.jpg",
+        insight: "Сила обратной связи (Hattie & Timperley, 2007): Расплывчатая похвала вроде «хорошо» неэффективна. Улучшение требует конкретной, немедленной обратной связи, сосредоточенной на задаче (например, «голос был слишком тихим»), что помогает преодолеть разрыв между текущим и желаемым результатом.",
+        scholar: "https://scholar.google.com/scholar?q=The+power+of+feedback+Hattie+Timperley+2007",
+        steps: [
+          "Задайте 3 вопроса обратной связи: «Куда я иду?» (цели), «Как я продвигаюсь?» (прогресс) и «Что дальше?» (следующие шаги), чтобы направить вашего критика.",
+          "Требуйте обратной связи на уровне задачи: вместо «Было ли хорошо?», спросите «Поддерживал ли я зрительный контакт во время второго аргумента?», чтобы получить применимые данные.",
+          "Избегайте обратной связи, задевающей эго: отделите свою самооценку от выступления; сосредоточьтесь исключительно на том, как улучшить конкретную задачу.",
+          "Запишите и разберите сразу: посмотрите видео сразу после выступления, пока контекст свеж, чтобы дать себе объективную обратную связь на уровне задачи."
+        ]
+      }
+    }
+  };
+
+  const translations = {
+    en: {
+      nav_problem: "Problem", nav_research: "Research", nav_navigator: "Navigator", nav_resources: "Resources",
+      hero_badge: "UTMN Project 2026", hero_title: "Master Public Speaking with <span>Data-Driven</span> Confidence",
+      hero_desc: "A personalized navigator that transforms fear into confidence. Built on real student data and proven oratory frameworks.", hero_btn: "Start Navigation",
+      project_video_title: "Project Overview", project_video_desc: "We recommend watching this video, which provides a basic overview of public speaking.",
+      prob1_title: "Information Overload", prob1_text: "Hundreds of conflicting theories, but no clear roadmap tailored to your specific skill level.",
+      prob2_title: "Lack of Feedback", prob2_text: "Without a mentor, it is hard to diagnose weak spots like structure, voice modulation, or anxiety triggers.",
+      research_title: "Research Methodology", research_desc: "We conducted a survey on this topic and also reviewed Google Scholar articles. The results were rather interesting.",
+      survey_title: "Key Findings", stat_structure: "Structure Issues", stat_anxiety: "Speech Anxiety", stat_impromptu: "Impromptu Fears", stat_confidence: "Avg. Confidence",
+      nav_title: "Personal Speech Navigator", nav_sub: "Select your main difficulty to get a science-backed solution.",
+      btn_anxiety: "Anxiety / Fear", btn_anxiety_sub: "", btn_structure: "Logical Structure", btn_structure_sub: "",
+      btn_voice: "Voice Control", btn_voice_sub: "", btn_body: "Body Language", btn_body_sub: "",
+      btn_impromptu: "Impromptu & Q&A", btn_impromptu_sub: "", btn_feedback: "Getting Feedback", btn_feedback_sub: "",
+      res_title: "Resource Library", btn_show: "Show Links", res1_title: "Analysis", res2_title: "Templates", res3_title: "Communities", res4_title: "AI Tools",
+      footer_text: "Public Speech Improvement Navigator — A research project based on student survey data.",
+      read_article: "Read Article on Google Scholar", video_placeholder: "VIDEO PLACEHOLDER"
+    },
+    ru: {
+      nav_problem: "Проблема", nav_research: "Исследование", nav_navigator: "Навигатор", nav_resources: "Ресурсы",
+      hero_badge: "UTMN Project 2026", hero_title: "Овладейте публичными выступлениями с помощью <span>данных</span>",
+      hero_desc: "Персональный навигатор, превращающий страх в уверенность. Основан на реальных данных студентов и проверенных ораторских методиках.", hero_btn: "Начать навигацию",
+      project_video_title: "Обзор проекта", project_video_desc: "Мы рекомендуем посмотреть это видео, которое даёт базовое представление о публичных выступлениях.",
+      prob1_title: "Информационная перегрузка", prob1_text: "Сотни противоречивых теорий, но нет чёткого плана, адаптированного под ваш уровень подготовки.",
+      prob2_title: "Недостаток обратной связи", prob2_text: "Без наставника сложно выявить слабые места, такие как структура, интонация или причины волнения.",
+      research_title: "Методология исследования", research_desc: "Мы провели опрос на эту тему, а также изучили статьи на Google Scholar. Результаты оказались довольно интересными.",
+      survey_title: "Ключевые выводы", stat_structure: "Проблемы структуры", stat_anxiety: "Волнение", stat_impromptu: "Страх импровизации", stat_confidence: "Средняя уверенность",
+      nav_title: "Персональный Навигатор", nav_sub: "Выберите свою главную трудность для получения решения.",
+      btn_anxiety: "Anxiety / Fear", btn_anxiety_sub: "", btn_structure: "Logical Structure", btn_structure_sub: "",
+      btn_voice: "Voice Control", btn_voice_sub: "", btn_body: "Body Language", btn_body_sub: "",
+      btn_impromptu: "Impromptu & Q&A", btn_impromptu_sub: "", btn_feedback: "Getting Feedback", btn_feedback_sub: "",
+      res_title: "Библиотека ресурсов", btn_show: "Показать ссылки", res1_title: "Анализ", res2_title: "Шаблоны", res3_title: "Сообщества", res4_title: "AI-инструменты",
+      footer_text: "Public Speech Improvement Navigator — исследовательский проект ТюмГУ.",
+      read_article: "Читать статью на Google Scholar", video_placeholder: "МЕСТО ДЛЯ ВИДЕО"
+    }
+  };
+
+  let currentLang = 'en';
+  let currentTopic = 'anxiety';
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) el.innerHTML = translations[lang][key];
+    });
+    document.querySelectorAll('.resource-toggle').forEach(btn => { if(!btn.classList.contains('active')) btn.innerHTML = translations[lang].btn_show; });
+    document.querySelectorAll('.lang-btn').forEach(btn => { btn.classList.toggle('active', btn.getAttribute('data-lang') === lang); });
+    renderNavigatorContent(currentTopic);
+  }
+
+  function renderNavigatorContent(topic) {
+    currentTopic = topic;
+    const data = navigatorData[currentLang][topic];
+    const contentDiv = document.getElementById('navContent');
+    
+    const isDark = document.body.classList.contains('dark-mode');
+    const overlayColor = isDark ? 'rgba(31, 41, 55, 0.95)' : 'rgba(255, 255, 255, 0.94)';
+    
+    contentDiv.style.backgroundImage = `linear-gradient(${overlayColor}, ${overlayColor}), url('${data.bg}')`;
+    contentDiv.style.backgroundColor = overlayColor; 
+
+    let imageHtml = '';
+    if (data.image) { imageHtml = `<div class="nav-content-image"><img src="${data.image}" alt="${data.title}"></div>`; }
+    
+    contentDiv.innerHTML = `
+      <div class="plan-header">
+        <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom:0.5rem; color:var(--text-main);">${data.title}</h2>
+        <p style="font-size:1.1rem; color:var(--text-muted); max-width:600px;">${data.desc}</p>
+      </div>
+      ${imageHtml}
+      <div class="research-box">
+        <h4 style="color:var(--accent); margin-bottom:0.5rem;"><i class="fas fa-book-open"></i> Research Insight</h4>
+        <p style="font-size:0.95rem; color:var(--text-main); line-height:1.6;">${data.insight}</p>
+        <a href="${data.scholar}" target="_blank" class="scholar-link"><i class="fas fa-graduation-cap"></i> <span data-i18n="read_article">Read Article on Google Scholar</span></a>
+      </div>
+      <div class="plan-section">
+        <h3><i class="fas fa-list-check" style="color:var(--accent)"></i> Action Plan</h3>
+        <ul class="checklist">${data.steps.map(step => `<li>${step}</li>`).join('')}</ul>
+      </div>
+      <div class="plan-section">
+        <h3><i class="fas fa-video" style="color:var(--accent)"></i> <span data-i18n="video_placeholder">VIDEO PLACEHOLDER</span></h3>
+        <div class="video-user-placeholder"><i class="fas fa-code" style="font-size:2rem; margin-bottom:1rem;"></i><p>Insert your video iframe or link in the code here.</p></div>
+      </div>
+    `;
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (translations[currentLang][key]) el.innerHTML = translations[currentLang][key]; });
+    document.querySelectorAll('.nav-btn').forEach(btn => { btn.classList.toggle('active', btn.getAttribute('data-nav') === topic); });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => { btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang)); });
+  document.querySelectorAll('.nav-btn').forEach(btn => { btn.addEventListener('click', (e) => { renderNavigatorContent(e.currentTarget.dataset.nav); }); });
+
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    // ИЗМЕНЕНО: Перерисовка навигатора для смены цвета подложки при смене темы
+    renderNavigatorContent(currentTopic);
+  });
+
+  document.querySelectorAll('.resource-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); const list = btn.nextElementSibling; const isHidden = !list.classList.contains('show');
+      list.classList.toggle('show');
+      if (isHidden) { btn.innerHTML = translations[currentLang].btn_show === "Show Links" ? "Hide Links" : "Скрыть ссылки"; btn.classList.add('active'); }
+      else { btn.innerHTML = translations[currentLang].btn_show; btn.classList.remove('active'); }
+    });
+  });
+
+  function animateValue(element, start, end, duration) {
+    let startTimestamp = null; const isFloat = String(end).includes('.'); const suffix = element.dataset.suffix || '';
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp; const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const current = progress * (end - start) + start; element.textContent = (isFloat ? current.toFixed(1) : Math.floor(current)) + suffix;
+      if (progress < 1) { window.requestAnimationFrame(step); }
+    }; window.requestAnimationFrame(step);
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.stat-number').forEach(numEl => { const target = parseFloat(numEl.dataset.target); animateValue(numEl, 0, target, 1500); });
+        entry.target.querySelectorAll('.progress-fill').forEach(bar => { bar.style.width = bar.dataset.width; });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const statsSection = document.getElementById('survey-insights');
+  if (statsSection) statsObserver.observe(statsSection);
+
+  const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+  const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, observerOptions);
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  setLanguage('en');
+</script>
+</body>
+</html>
