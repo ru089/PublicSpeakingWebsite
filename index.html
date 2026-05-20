@@ -9,68 +9,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     :root {
-      --bg-body: #f8f9fa;
-      --bg-card: #ffffff;
-      --bg-nav: rgba(255, 255, 255, 0.95);
-      --text-main: #1f2937;
-      --text-muted: #6b7280;
-      --accent: #004e92;
-      --accent-dark: #003366;
-      --accent-light: #e6f0fa;
-      --border-color: #e5e7eb;
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --radius-xl: 1.5rem;
-      --radius-md: 1rem;
+      --bg-body: #f8f9fa; --bg-card: #ffffff; --bg-nav: rgba(255, 255, 255, 0.95);
+      --text-main: #1f2937; --text-muted: #6b7280; --accent: #004e92; --accent-dark: #003366;
+      --accent-light: #e6f0fa; --border-color: #e5e7eb;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05); --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius-xl: 1.5rem; --radius-md: 1rem;
     }
-
     body.dark-mode {
-      --bg-body: #111827;
-      --bg-card: #1f2937;
-      --bg-nav: rgba(17, 24, 39, 0.95);
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --accent: #3b82f6; 
-      --accent-dark: #60a5fa;
-      --accent-light: #374151;
-      --border-color: #374151;
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      --bg-body: #111827; --bg-card: #1f2937; --bg-nav: rgba(17, 24, 39, 0.95);
+      --text-main: #f9fafb; --text-muted: #9ca3af; --accent: #3b82f6; --accent-dark: #60a5fa;
+      --accent-light: #374151; --border-color: #374151;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3); --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-body);
-      color: var(--text-main);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      overflow-x: hidden;
-    }
-
-    h1, h2, h3, h4, .logo {
-      font-family: 'Montserrat', sans-serif;
-      letter-spacing: -0.02em;
-    }
-
+    body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-main); line-height: 1.6; scroll-behavior: smooth; transition: background-color 0.3s ease, color 0.3s ease; overflow-x: hidden; }
+    h1, h2, h3, h4, .logo { font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
-    .navbar {
-      background: var(--bg-nav);
-      backdrop-filter: blur(12px);
-      position: sticky; top: 0; z-index: 100; padding: 1rem 0;
-      border-bottom: 1px solid var(--border-color);
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-    }
+    .navbar { background: var(--bg-nav); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; padding: 1rem 0; border-bottom: 1px solid var(--border-color); transition: background-color 0.3s ease, border-color 0.3s ease; }
     .nav-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .brand-area { display: flex; align-items: center; gap: 1rem; }
     .uni-logo { height: 50px; width: auto; object-fit: contain; }
@@ -86,11 +44,7 @@
     .theme-toggle { background: none; border: none; cursor: pointer; color: var(--text-main); font-size: 1.2rem; transition: 0.3s; }
     .theme-toggle:hover { color: var(--accent); transform: rotate(15deg); }
 
-    .hero {
-      position: relative; min-height: 90vh; display: flex; align-items: center;
-      background: linear-gradient(135deg, var(--bg-body) 0%, var(--accent-light) 100%);
-      padding: 4rem 0; overflow: hidden;
-    }
+    .hero { position: relative; min-height: 90vh; display: flex; align-items: center; background: linear-gradient(135deg, var(--bg-body) 0%, var(--accent-light) 100%); padding: 4rem 0; overflow: hidden; }
     .hero::before { content: ''; position: absolute; top: -10%; right: -10%; width: 50%; height: 120%; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); opacity: 0.08; z-index: 0; filter: blur(80px); }
     .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
     .hero-text { max-width: 600px; }
@@ -131,13 +85,7 @@
     .nav-btn.active { background: var(--accent); color: white; box-shadow: var(--shadow-sm); }
     .nav-btn i { margin-top: 3px; }
     
-    /* ИЗМЕНЕНО: Убран ::before, фон настраивается через JS и CSS-градиент */
-    .nav-content-area {
-      position: relative; padding: 3.5rem; overflow-y: auto; color: var(--text-main);
-      transition: background-color 0.3s ease-in-out, background-image 0.5s ease-in-out; 
-      background-size: cover; background-position: center; z-index: 1; max-height: 850px;
-      background-color: var(--bg-card); /* Запасной цвет, если картинка не загрузится */
-    }
+    .nav-content-area { position: relative; padding: 3.5rem; overflow-y: auto; color: var(--text-main); transition: background-color 0.3s ease-in-out, background-image 0.5s ease-in-out; background-size: cover; background-position: center; z-index: 1; max-height: 850px; background-color: var(--bg-card); }
 
     .research-box { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-left: 5px solid var(--accent); padding: 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
     body.dark-mode .research-box { background: rgba(0,0,0,0.3); }
@@ -154,8 +102,13 @@
     .nav-content-image { border-radius: 1rem; overflow: hidden; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     .nav-content-image img { width: 100%; height: auto; display: block; max-height: 350px; object-fit: cover; }
 
-    .video-user-placeholder { background: #e5e7eb; border: 2px dashed #9ca3af; border-radius: 1rem; padding: 3rem; text-align: center; color: #6b7280; margin-top: 1rem; }
-    body.dark-mode .video-user-placeholder { border-color: #4b5563; color: #9ca3af; background: #374151; }
+    /* ИЗМЕНЕНО: Новые стили для списка видео */
+    .video-links-list { list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .video-links-list li { padding: 0.8rem 1.2rem; background: var(--accent-light); border-radius: 0.8rem; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+    .video-links-list li:hover { transform: translateX(5px); border-color: var(--accent); }
+    .video-links-list a { display: flex; align-items: center; gap: 0.8rem; color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+    .video-links-list a:hover { color: var(--accent); }
+    .video-links-list i { font-size: 1.2rem; color: #E62B1E; flex-shrink: 0; } /* Цвет TED */
 
     .resource-card { background: var(--bg-card); border-radius: 1rem; padding: 2.5rem; border: 1px solid var(--border-color); transition: transform 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
     .resource-card:hover { transform: translateY(-5px); border-color: var(--accent); }
@@ -278,7 +231,7 @@
       <button class="nav-btn active" data-nav="anxiety"><i class="fas fa-brain"></i> <div><span data-i18n="btn_anxiety">Anxiety / Fear</span><br><span data-i18n="btn_anxiety_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
       <button class="nav-btn" data-nav="structure"><i class="fas fa-layer-group"></i> <div><span data-i18n="btn_structure">Logical Structure</span><br><span data-i18n="btn_structure_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
       <button class="nav-btn" data-nav="voice"><i class="fas fa-microphone-alt"></i> <div><span data-i18n="btn_voice">Voice Control</span><br><span data-i18n="btn_voice_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
-      <button class="nav-btn" data-nav="body"><i class="fas fa-child-reaching"></i> <div><span data-i18n="btn_body">Body Language</span><br><span data-i18n="btn_body_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
+      <button class="nav-btn" data-nav="body"><i class="fas fa-person"></i> <div><span data-i18n="btn_body">Body Language</span><br><span data-i18n="btn_body_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
       <button class="nav-btn" data-nav="impromptu"><i class="fas fa-bolt"></i> <div><span data-i18n="btn_impromptu">Impromptu & Q&A</span><br><span data-i18n="btn_impromptu_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
       <button class="nav-btn" data-nav="feedback"><i class="fas fa-clipboard-check"></i> <div><span data-i18n="btn_feedback">Getting Feedback</span><br><span data-i18n="btn_feedback_sub" style="font-size:0.8rem; opacity:0.8; font-weight:400;"></span></div></button>
     </div>
@@ -289,9 +242,9 @@
 <section id="resources" class="container" style="padding-top: 12rem;">
   <h2 class="section-title reveal" data-i18n="res_title">Resource Library</h2>
   <div class="grid-4" style="margin-top: 3rem;">
-    <div class="resource-card reveal"><i class="fas fa-video"></i><h3 data-i18n="res1_title">Analysis</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://www.youtube.com/c/CharismaonCommand" target="_blank"><i class="fab fa-youtube"></i> Charisma on Command</a></li><li><a href="https://www.ted.com/talks" target="_blank"><i class="fab fa-youtube"></i> TED Talks Official</a></li></ul></div>
-    <div class="resource-card reveal"><i class="fas fa-file-pdf"></i><h3 data-i18n="res2_title">Templates</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="#" target="_blank"><i class="fas fa-file-alt"></i> PREP Framework PDF</a></li><li><a href="#" target="_blank"><i class="fas fa-file-alt"></i> Monroe's Motivated Sequence</a></li></ul></div>
-    <div class="resource-card reveal"><i class="fas fa-users"></i><h3 data-i18n="res3_title">Communities</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://www.toastmasters.org" target="_blank"><i class="fas fa-globe"></i> Toastmasters Int.</a></li><li><a href="https://www.meetup.com" target="_blank"><i class="fas fa-users"></i> Meetup Groups</a></li></ul></div>
+    <div class="resource-card reveal"><i class="fas fa-video"></i><h3 data-i18n="res1_title">Analysis</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://www.youtube.com/channel/UCbmNph6atAoGfqLoCL_duAg" target="_blank"><i class="fab fa-youtube"></i> Talks at Google</a></li><li><a href="https://www.ted.com/talks" target="_blank"><i class="fab fa-youtube"></i> TED Talks Official</a></li></ul></div>
+    <div class="resource-card reveal"><i class="fas fa-file-pdf"></i><h3 data-i18n="res2_title">Templates</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://fourweekmba.com/prep-method/" target="_blank"><i class="fas fa-file-alt"></i> PREP Method</a></li><li><a href="https://www.fastforwardielts.com/post/ielts-speaking-part-1-how-i-use-the-ppf-technique-to-say-more-and-improve-grammatical-range" target="_blank"><i class="fas fa-file-alt"></i> PPF Method</a></li></ul></div>
+    <div class="resource-card reveal"><i class="fas fa-users"></i><h3 data-i18n="res3_title">Communities</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://www.toastmasters.org" target="_blank"><i class="fas fa-globe"></i> Toastmasters Int.</a></li><li><a href="https://www.utmn.ru/o-tyumgu/organizatsionnaya-skhema-tyumgu/tsentr-iyakt/" target="_blank"><i class="fas fa-users"></i> UTMN Language Power</a></li></ul></div>
     <div class="resource-card reveal"><i class="fas fa-robot"></i><h3 data-i18n="res4_title">AI Tools</h3><button class="btn-outline resource-toggle" data-i18n="btn_show">Show Links</button><ul class="resource-list"><li><a href="https://www.yoodli.ai" target="_blank"><i class="fas fa-link"></i> Yoodli AI</a></li><li><a href="https://www.orai.com" target="_blank"><i class="fas fa-link"></i> Orai App</a></li></ul></div>
   </div>
 </section>
@@ -314,6 +267,7 @@
   mainVideo.addEventListener('ended', function() { videoOverlay.style.display = 'flex'; });
   mainVideo.addEventListener('play', function() { videoOverlay.style.display = 'none'; });
 
+  // ИЗМЕНЕНО: Добавлен массив videos с официальными ссылками TED
   const navigatorData = {
     en: {
       anxiety: {
@@ -327,6 +281,10 @@
           "Implement gradual exposure: start by presenting to 1-2 trusted peers before facing a large audience to desensitize the fear response.",
           "Challenge catastrophic thoughts: ask yourself \"What is the worst that can realistically happen?\" and rationally evaluate the actual risk.",
           "Practice the opening 5 times in a row without stopping to build \"muscle memory\" as a safety anchor."
+        ],
+        videos: [
+          { title: "Joe Kowan: How I beat stage fright", url: "https://www.ted.com/talks/joe_kowan_how_i_beat_stage_fright" },
+          { title: "Kelly McGonigal: How to make stress your friend", url: "https://www.ted.com/talks/kelly_mcgonigal_how_to_make_stress_your_friend" }
         ]
       },
       structure: {
@@ -340,6 +298,10 @@
           "Use explicit signposting: verbally guide the audience by saying \"Moving to the second point...\" or \"To summarize...\" to reduce their cognitive load.",
           "Open with a hook and close with a specific Call to Action (CTA) to give your structure a clear, memorable purpose.",
           "Practice the 10-minute rule: divide longer speeches into distinct, digestible segments to maintain audience attention."
+        ],
+        videos: [
+          { title: "Nancy Duarte: The secret structure of great talks", url: "https://www.ted.com/talks/nancy_duarte_the_secret_structure_of_great_talks" },
+          { title: "Simon Sinek: How great leaders inspire action", url: "https://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action" }
         ]
       },
       voice: {
@@ -353,13 +315,15 @@
           "Use the \"Power Pause\": stop for 2-3 seconds after a critical point to let the audience process the information, utilizing prosodic boundaries.",
           "Vary your pitch intentionally: raise pitch slightly to signal a new idea, and lower it to convey authority on important statements.",
           "Avoid the \"up-talk\" pattern (raising pitch at the end of declarative sentences), as it signals uncertainty and undermines comprehension."
+        ],
+        videos: [
+          { title: "Julian Treasure: How to speak so that people want to listen", url: "https://www.ted.com/talks/julian_treasure_how_to_speak_so_that_people_want_to_listen" }
         ]
       },
       body: {
         title: "Controlling Body Language",
         desc: "Mastering eye contact, gestures, and posture.",
         bg: "images/nav-body.jpg",
-        image: "images/body-inside.jpg",
         insight: "Gesture Cognition (Pouw et al., 2014): Gestures are not just visual aids for the audience; they actively help the speaker think. Open, expressive gestures reduce the speaker's cognitive load and significantly improve the audience's comprehension.",
         scholar: "https://scholar.google.com/scholar?q=Toward+a+more+embedded+extended+perspective+on+the+cognitive+function+of+gestures+Pouw+2014",
         steps: [
@@ -367,6 +331,9 @@
           "Don't suppress your natural hand movements: gesturing reduces your own cognitive load, actively helping you think and recall words faster.",
           "Maintain an open posture (visible palms) to signal trust and reduce the psychological distance between you and the audience.",
           "Synchronize gestures with speech: ensure your hand movements coincide exactly with the words they emphasize to reinforce the message."
+        ],
+        videos: [
+          { title: "Amy Cuddy: Your body language may shape who you are", url: "https://www.ted.com/talks/amy_cuddy_your_body_language_may_shape_who_you_are" }
         ]
       },
       impromptu: {
@@ -380,12 +347,15 @@
           "Buy processing time: repeat the question aloud or take a deliberate pause to offload working memory while formulating your first point.",
           "Limit your answer to 3 points max: this prevents working memory overload that causes rambling and \"choking under pressure.\"",
           "Practice under mild stress: rehearse impromptu answers while slightly elevated heart rate to train your brain to function despite physiological arousal."
+        ],
+        videos: [
+          { title: "Matt Abrahams: Think faster, talk smarter", url: "https://www.youtube.com/watch?v=x6TsR3y5Qfg" }
         ]
       },
       feedback: {
         title: "Getting Constructive Feedback",
         desc: "Diagnosing errors through external review.",
-        bg: "nav-feedback.jpg",
+        bg: "images/nav-feedback.jpg",
         insight: "The Power of Feedback (Hattie & Timperley, 2007): Vague praise like \"good job\" is ineffective. Improvement requires specific, immediate feedback focused on the task (e.g., \"your voice was too quiet\"), which helps bridge the gap between current and desired performance.",
         scholar: "https://scholar.google.com/scholar?q=The+power+of+feedback+Hattie+Timperley+2007",
         steps: [
@@ -393,6 +363,10 @@
           "Demand task-specific feedback: instead of \"Was it good?\", ask \"Did I make eye contact during the second argument?\" to get actionable data.",
           "Avoid ego-driven feedback: separate your self-worth from the performance; focus purely on how the specific task can be improved.",
           "Record and review immediately: watch your video right after speaking while the context is fresh to give yourself objective, task-level feedback."
+        ],
+        videos: [
+          { title: "Sheila Heen: How to use others' feedback to learn and grow", url: "https://www.youtube.com/watch?v=FQNbaKkYk_Q" },
+          { title: "Bill Gates: Teachers need real feedback", url: "https://www.ted.com/talks/bill_gates_teachers_need_real_feedback" }
         ]
       }
     },
@@ -408,6 +382,10 @@
           "Применяйте постепенную экспозицию: начните с выступления перед 1-2 доверенными людьми, прежде чем выходить к большой аудитории, чтобы снизить чувствительность к стрессу.",
           "Бросьте вызов катастрофическим мыслям: спросите себя «Что самое худшее может реально произойти?» и рационально оцените действительный риск.",
           "Отрепетируйте начало 5 раз подряд без остановок, чтобы создать «мышечную память» как якорь безопасности."
+        ],
+        videos: [
+          { title: "Джо Коуэн: Как я победил страх сцены", url: "https://www.ted.com/talks/joe_kowan_how_i_beat_stage_fright" },
+          { title: "Келли Макгонигал: Как сделать стресс своим другом", url: "https://www.ted.com/talks/kelly_mcgonigal_how_to_make_stress_your_friend" }
         ]
       },
       structure: {
@@ -421,6 +399,10 @@
           "Используйте явные навигационные фразы: словесно направляйте аудиторию, говоря «Переходя ко второму пункту...» или «Подводя итог...», чтобы снизить её когнитивную нагрузку.",
           "Начните с привлечения внимания и завершите конкретным Призывом к действию (CTA), чтобы придать структуре чёткую, запоминающуюся цель.",
           "Соблюдайте «правило 10 минут»: делите длинные речи на отдельные, легко усваиваемые сегменты, чтобы поддерживать внимание аудитории."
+        ],
+        videos: [
+          { title: "Нэнси Дуарте: Секретная структура великих выступлений", url: "https://www.ted.com/talks/nancy_duarte_the_secret_structure_of_great_talks" },
+          { title: "Саймон Синек: Как великие лидеры вдохновляют на действия", url: "https://www.ted.com/talks/simon_sinek_how_great_leaders_inspire_action" }
         ]
       },
       voice: {
@@ -434,13 +416,15 @@
           "Используйте «Силовую паузу»: остановитесь на 2-3 секунды после важной мысли, чтобы аудитория успела усвоить информацию, используя просодические границы.",
           "Осознанно варьируйте тон: слегка повышайте голос, чтобы сигнализировать о новой идее, и понижайте его для придания веса важным утверждениям.",
           "Избегайте интонации вопроса в конце утвердительных предложений (когда голос идёт вверх), так как это сигнализирует о неуверенности и мешает восприятию."
+        ],
+        videos: [
+          { title: "Джулиан Трежер: Как говорить так, чтобы вас слушали", url: "https://www.ted.com/talks/julian_treasure_how_to_speak_so_that_people_want_to_listen" }
         ]
       },
       body: {
         title: "Контроль языка тела",
         desc: "Мастерство зрительного контакта, жестов и осанки.",
         bg: "images/nav-body.jpg",
-        image: "images/body-inside.jpg",
         insight: "Когнитивная функция жестов (Pouw et al., 2014): Жесты — это не просто визуальное подспорье для аудитории; они активно помогают спикеру думать. Открытые, выразительные жесты снижают когнитивную нагрузку говорящего и значительно улучшают понимание аудитории.",
         scholar: "https://scholar.google.com/scholar?q=Toward+a+more+embedded+extended+perspective+on+the+cognitive+function+of+gestures+Pouw+2014",
         steps: [
@@ -448,6 +432,9 @@
           "Не подавляйте естественные движения рук: жестикуляция снижает вашу собственную когнитивную нагрузку, активно помогая вам думать и вспоминать слова быстрее.",
           "Поддерживайте открытую позу (видимые ладони), чтобы сигнализировать о доверии и сократить психологическую дистанцию между вами и аудиторией.",
           "Синхронизируйте жесты с речью: убедитесь, что движения рук совпадают именно с теми словами, которые они подчёркивают, для усиления сообщения."
+        ],
+        videos: [
+          { title: "Эми Кадди: Язык тела может формировать вас", url: "https://www.ted.com/talks/amy_cuddy_your_body_language_may_shape_who_you_are" }
         ]
       },
       impromptu: {
@@ -461,12 +448,15 @@
           "Выиграйте время на обработку: повторите вопрос вслух или сделайте намеренную паузу, чтобы разгрузить рабочую память, формулируя первый пункт.",
           "Ограничьте ответ максимум 3 пунктами: это предотвращает перегрузку рабочей памяти, которая приводит к уходу от темы и «ступору под давлением».",
           "Тренируйтесь в условиях лёгкого стресса: репетируйте спонтанные ответы при слегка повышенном пульсе, чтобы приучить мозг работать вопреки физиологическому возбуждению."
+        ],
+        videos: [
+          { title: "Мэтт Абрахамс: Думай быстрее, говори умнее", url: "https://www.youtube.com/watch?v=x6TsR3y5Qfg" }
         ]
       },
       feedback: {
         title: "Получение конструктивной обратной связи",
         desc: "Диагностика ошибок через внешний обзор.",
-        bg: "nav-feedback.jpg",
+        bg: "images/nav-feedback.jpg",
         insight: "Сила обратной связи (Hattie & Timperley, 2007): Расплывчатая похвала вроде «хорошо» неэффективна. Улучшение требует конкретной, немедленной обратной связи, сосредоточенной на задаче (например, «голос был слишком тихим»), что помогает преодолеть разрыв между текущим и желаемым результатом.",
         scholar: "https://scholar.google.com/scholar?q=The+power+of+feedback+Hattie+Timperley+2007",
         steps: [
@@ -474,6 +464,10 @@
           "Требуйте обратной связи на уровне задачи: вместо «Было ли хорошо?», спросите «Поддерживал ли я зрительный контакт во время второго аргумента?», чтобы получить применимые данные.",
           "Избегайте обратной связи, задевающей эго: отделите свою самооценку от выступления; сосредоточьтесь исключительно на том, как улучшить конкретную задачу.",
           "Запишите и разберите сразу: посмотрите видео сразу после выступления, пока контекст свеж, чтобы дать себе объективную обратную связь на уровне задачи."
+        ],
+        videos: [
+          { title: "Шила Хин: Как использовать обратную связь для роста", url: "https://www.youtube.com/watch?v=FQNbaKkYk_Q" },
+          { title: "Билл Гейтс: Учителям нужна настоящая обратная связь", url: "https://www.ted.com/talks/bill_gates_teachers_need_real_feedback" }
         ]
       }
     }
@@ -482,8 +476,8 @@
   const translations = {
     en: {
       nav_problem: "Problem", nav_research: "Research", nav_navigator: "Navigator", nav_resources: "Resources",
-      hero_badge: "UTMN Project 2026", hero_title: "Master Public Speaking with <span>Data-Driven</span> Confidence",
-      hero_desc: "A personalized navigator that transforms fear into confidence. Built on real student data and proven oratory frameworks.", hero_btn: "Start Navigation",
+      hero_badge: "UTMN Project 2026", hero_title: "Master Public Speaking with <span>Improvement</span> Navigator",
+      hero_desc: "A personalized navigator that transforms fear into confidence. Based on real student data.", hero_btn: "Start Navigation",
       project_video_title: "Project Overview", project_video_desc: "We recommend watching this video, which provides a basic overview of public speaking.",
       prob1_title: "Information Overload", prob1_text: "Hundreds of conflicting theories, but no clear roadmap tailored to your specific skill level.",
       prob2_title: "Lack of Feedback", prob2_text: "Without a mentor, it is hard to diagnose weak spots like structure, voice modulation, or anxiety triggers.",
@@ -495,12 +489,12 @@
       btn_impromptu: "Impromptu & Q&A", btn_impromptu_sub: "", btn_feedback: "Getting Feedback", btn_feedback_sub: "",
       res_title: "Resource Library", btn_show: "Show Links", res1_title: "Analysis", res2_title: "Templates", res3_title: "Communities", res4_title: "AI Tools",
       footer_text: "Public Speech Improvement Navigator — A research project based on student survey data.",
-      read_article: "Read Article on Google Scholar", video_placeholder: "VIDEO PLACEHOLDER"
+      read_article: "Read Article on Google Scholar", watch_and_learn: "Watch & Learn"
     },
     ru: {
       nav_problem: "Проблема", nav_research: "Исследование", nav_navigator: "Навигатор", nav_resources: "Ресурсы",
-      hero_badge: "UTMN Project 2026", hero_title: "Овладейте публичными выступлениями с помощью <span>данных</span>",
-      hero_desc: "Персональный навигатор, превращающий страх в уверенность. Основан на реальных данных студентов и проверенных ораторских методиках.", hero_btn: "Начать навигацию",
+      hero_badge: "UTMN Project 2026", hero_title: "Овладейте публичными выступлениями с помощью <span>Персонального</span> Навигатора",
+      hero_desc: "Персональный навигатор, превращающий страх в уверенность. Основан на реальных данных студентов.", hero_btn: "Начать навигацию",
       project_video_title: "Обзор проекта", project_video_desc: "Мы рекомендуем посмотреть это видео, которое даёт базовое представление о публичных выступлениях.",
       prob1_title: "Информационная перегрузка", prob1_text: "Сотни противоречивых теорий, но нет чёткого плана, адаптированного под ваш уровень подготовки.",
       prob2_title: "Недостаток обратной связи", prob2_text: "Без наставника сложно выявить слабые места, такие как структура, интонация или причины волнения.",
@@ -512,7 +506,7 @@
       btn_impromptu: "Impromptu & Q&A", btn_impromptu_sub: "", btn_feedback: "Getting Feedback", btn_feedback_sub: "",
       res_title: "Библиотека ресурсов", btn_show: "Показать ссылки", res1_title: "Анализ", res2_title: "Шаблоны", res3_title: "Сообщества", res4_title: "AI-инструменты",
       footer_text: "Public Speech Improvement Navigator — исследовательский проект ТюмГУ.",
-      read_article: "Читать статью на Google Scholar", video_placeholder: "МЕСТО ДЛЯ ВИДЕО"
+      read_article: "Читать статью на Google Scholar", watch_and_learn: "Смотрите и учитесь"
     }
   };
 
@@ -530,6 +524,7 @@
     renderNavigatorContent(currentTopic);
   }
 
+  // ИЗМЕНЕНО: Добавлена генерация списка видео
   function renderNavigatorContent(topic) {
     currentTopic = topic;
     const data = navigatorData[currentLang][topic];
@@ -543,6 +538,18 @@
 
     let imageHtml = '';
     if (data.image) { imageHtml = `<div class="nav-content-image"><img src="${data.image}" alt="${data.title}"></div>`; }
+
+    let videosHtml = '';
+    if (data.videos && data.videos.length > 0) {
+      videosHtml = `
+        <div class="plan-section">
+          <h3><i class="fas fa-video" style="color:var(--accent)"></i> <span data-i18n="watch_and_learn">Watch & Learn</span></h3>
+          <ul class="video-links-list">
+            ${data.videos.map(v => `<li><a href="${v.url}" target="_blank"><i class="fas fa-play-circle"></i> ${v.title}</a></li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
     
     contentDiv.innerHTML = `
       <div class="plan-header">
@@ -559,10 +566,7 @@
         <h3><i class="fas fa-list-check" style="color:var(--accent)"></i> Action Plan</h3>
         <ul class="checklist">${data.steps.map(step => `<li>${step}</li>`).join('')}</ul>
       </div>
-      <div class="plan-section">
-        <h3><i class="fas fa-video" style="color:var(--accent)"></i> <span data-i18n="video_placeholder">VIDEO PLACEHOLDER</span></h3>
-        <div class="video-user-placeholder"><i class="fas fa-code" style="font-size:2rem; margin-bottom:1rem;"></i><p>Insert your video iframe or link in the code here.</p></div>
-      </div>
+      ${videosHtml}
     `;
     
     document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (translations[currentLang][key]) el.innerHTML = translations[currentLang][key]; });
@@ -577,7 +581,6 @@
     document.body.classList.toggle('dark-mode');
     const isDark = document.body.classList.contains('dark-mode');
     themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    // ИЗМЕНЕНО: Перерисовка навигатора для смены цвета подложки при смене темы
     renderNavigatorContent(currentTopic);
   });
 
