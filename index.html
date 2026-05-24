@@ -32,9 +32,9 @@
     .nav-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .brand-area { display: flex; align-items: center; gap: 1rem; }
     .uni-logo { height: 50px; width: auto; object-fit: contain; }
-	body.dark-mode .uni-logo {
-	  content: url('images/utmn-white.png');
-	}
+    body.dark-mode .uni-logo {
+      content: url('images/utmn-white.png');
+    }
     .logo { font-weight: 800; font-size: 1.4rem; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem; }
     .logo i { color: var(--accent); }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; flex-wrap: wrap; }
@@ -63,10 +63,6 @@
     .video-container { max-width: 900px; margin: 0 auto; position: relative; background: var(--bg-card); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); }
     .video-wrapper { position: relative; aspect-ratio: 16/9; background: #000; overflow: hidden; }
     .video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: rgba(0,0,0,0.5); color: white; cursor: pointer; transition: 0.3s; z-index: 2; }
-    .video-placeholder:hover { background: rgba(0,0,0,0.3); }
-    .play-btn-lg { font-size: 5rem; color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.6); margin-bottom: 1rem; transition: 0.3s; }
-    .video-placeholder:hover .play-btn-lg { transform: scale(1.1); color: var(--accent); }
 
     section { padding: 8rem 0; }
     .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-main); }
@@ -105,13 +101,12 @@
     .nav-content-image { border-radius: 1rem; overflow: hidden; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     .nav-content-image img { width: 100%; height: auto; display: block; max-height: 350px; object-fit: cover; }
 
-    /* ИЗМЕНЕНО: Новые стили для списка видео */
     .video-links-list { list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.75rem; }
     .video-links-list li { padding: 0.8rem 1.2rem; background: var(--accent-light); border-radius: 0.8rem; border: 1px solid var(--border-color); transition: all 0.3s ease; }
     .video-links-list li:hover { transform: translateX(5px); border-color: var(--accent); }
     .video-links-list a { display: flex; align-items: center; gap: 0.8rem; color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
     .video-links-list a:hover { color: var(--accent); }
-    .video-links-list i { font-size: 1.2rem; color: #E62B1E; flex-shrink: 0; } /* Цвет TED */
+    .video-links-list i { font-size: 1.2rem; color: #E62B1E; flex-shrink: 0; }
 
     .resource-card { background: var(--bg-card); border-radius: 1rem; padding: 2.5rem; border: 1px solid var(--border-color); transition: transform 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
     .resource-card:hover { transform: translateY(-5px); border-color: var(--accent); }
@@ -124,6 +119,27 @@
     .resource-list li { margin-bottom: 0.8rem; font-size: 0.95rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
     .resource-list a { color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
     .resource-list a:hover { color: var(--accent); }
+
+    /* NEW: Feedback Section Styles */
+    .feedback-form-group { margin-bottom: 1.5rem; }
+    .feedback-label { font-weight: 600; margin-bottom: 0.5rem; display: block; font-size: 0.95rem; color: var(--text-main); }
+    .feedback-input, .feedback-textarea {
+      width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem;
+      background: var(--bg-body); color: var(--text-main); font-family: 'Inter', sans-serif;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease; font-size: 1rem;
+    }
+    .feedback-input:focus, .feedback-textarea:focus {
+      outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 78, 146, 0.15);
+    }
+    body.dark-mode .feedback-input:focus, body.dark-mode .feedback-textarea:focus {
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+    .feedback-textarea { resize: vertical; min-height: 120px; }
+    .comment-item { border-bottom: 1px solid var(--border-color); padding-bottom: 1.2rem; margin-bottom: 1.2rem; }
+    .comment-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .comment-meta { display: flex; justify-content: space-between; margin-bottom: 0.5rem; align-items: center; }
+    .toast-notification { position: fixed; bottom: 2rem; right: 2rem; background: var(--accent); color: white; padding: 1rem 1.5rem; border-radius: 0.8rem; box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all 0.4s ease; z-index: 1000; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+    .toast-notification.show { transform: translateY(0); opacity: 1; }
 
     footer { background: #000000; color: #aeb4b0; padding: 5rem 0; margin-top: 8rem; text-align: center; border-top: 4px solid var(--accent); }
     .footer-link { color: var(--accent); text-decoration: none; font-weight: 600; border-bottom: 1px dashed var(--accent); }
@@ -178,7 +194,7 @@
       <a href="#navigator" class="btn"><i class="fas fa-compass"></i> <span data-i18n="hero_btn">Start Navigation</span></a>
     </div>
     <div class="hero-image-wrapper">
-      <img src="images/hero.jpg" alt="Powerful public speaker" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1200&auto=format&fit=crop';">
+      <img src="images/hero.jpg">
     </div>
   </div>
 </section>
@@ -190,13 +206,13 @@
   </div>
   <div class="video-container">
     <div class="video-wrapper">
-	  <iframe 
-		src="https://drive.google.com/file/d/1v3vT3-oKYYJn7XfXaDnBaVpbYuqXUmPo/preview" 
-		allow="autoplay" 
-		allowfullscreen 
-		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
-	  </iframe>
-	</div>
+      <iframe 
+        src="https://drive.google.com/file/d/1v3vT3-oKYYJn7XfXaDnBaVpbYuqXUmPo/preview" 
+        allow="autoplay" 
+        allowfullscreen 
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
+      </iframe>
+    </div>
   </div>
 </section>
 
@@ -256,13 +272,40 @@
   </div>
 </section>
 
+<section id="feedback-section" class="container" style="padding-top: 12rem;">
+  <div style="text-align: center; margin-bottom: 3rem;">
+    <h2 class="section-title reveal" data-i18n="feedback_title">Leave Your Feedback</h2>
+    <p class="section-sub reveal" data-i18n="feedback_sub">Share your thoughts, tips, or personal experiences with public speaking.</p>
+  </div>
+  <div class="grid-2 reveal">
+    <div class="glass-card">
+      <form id="feedbackForm">
+        <div class="feedback-form-group">
+          <label class="feedback-label" data-i18n="feedback_name_label">Name</label>
+          <input type="text" id="fbName" class="feedback-input" required>
+        </div>
+        <div class="feedback-form-group">
+          <label class="feedback-label" data-i18n="feedback_comment_label">Comment</label>
+          <textarea id="fbComment" class="feedback-textarea" required></textarea>
+        </div>
+        <button type="submit" class="btn" style="width: 100%; justify-content: center;"><i class="fas fa-paper-plane"></i> <span data-i18n="feedback_submit">Submit Feedback</span></button>
+      </form>
+    </div>
+    <div class="glass-card" style="max-height: 500px; overflow-y: auto; display: flex; flex-direction: column;">
+      <h3 style="margin-bottom: 1.5rem; flex-shrink: 0;" data-i18n="feedback_recent">Recent Comments</h3>
+      <div id="commentsList" style="flex-grow: 1;">
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="container">
     <i class="fas fa-university" style="color:var(--accent); font-size:2rem; margin-bottom:1.5rem;"></i>
     <h3 style="font-size:1.5rem; color:white; margin-bottom:1rem;">Tyumen State University</h3>
     <p data-i18n="footer_text">Public Speech Improvement Navigator — A research project based on student survey data.</p>
     <div style="margin-top: 2rem;"><a href="mailto:vd089@yandex.ru" class="footer-link"><i class="fas fa-envelope"></i> vd089@yandex.ru</a></div>
-    <p style="font-size:0.85rem; opacity:0.5; margin-top:3rem;">© 2026 | UTMN Research Prototype</p>
+    <p style="font-size:0.85rem; opacity:0.5; margin-top:3rem;">2026 | UTMN Research Prototype</p>
   </div>
 </footer>
 
@@ -489,7 +532,10 @@
       btn_impromptu: "Impromptu & Q&A", btn_impromptu_sub: "", btn_feedback: "Getting Feedback", btn_feedback_sub: "",
       res_title: "Resource Library", btn_show: "Show Links", res1_title: "Analysis", res2_title: "Templates", res3_title: "Communities", res4_title: "AI Tools",
       footer_text: "Public Speech Improvement Navigator — A research project based on student survey data.",
-      read_article: "Read Article on Google Scholar", watch_and_learn: "Watch & Learn"
+      read_article: "Read Article on Google Scholar", watch_and_learn: "Watch & Learn",
+      feedback_title: "Leave Your Feedback", feedback_sub: "Share your thoughts, tips, or personal experiences with public speaking.",
+      feedback_name_label: "Name", feedback_comment_label: "Comment", feedback_submit: "Submit Feedback",
+      feedback_recent: "Recent Comments", feedback_success: "Thank you for your feedback!"
     },
     ru: {
       nav_problem: "Проблема", nav_research: "Исследование", nav_navigator: "Навигатор", nav_resources: "Ресурсы",
@@ -501,12 +547,15 @@
       research_title: "Методология исследования", research_desc: "Мы провели опрос на эту тему, а также изучили статьи на Google Scholar. Результаты оказались довольно интересными.",
       survey_title: "Ключевые выводы", stat_structure: "Проблемы структуры", stat_anxiety: "Волнение", stat_impromptu: "Страх импровизации", stat_confidence: "Средняя уверенность",
       nav_title: "Персональный Навигатор", nav_sub: "Выберите свою главную трудность для получения решения.",
-      btn_anxiety: "Anxiety / Fear", btn_anxiety_sub: "", btn_structure: "Logical Structure", btn_structure_sub: "",
-      btn_voice: "Voice Control", btn_voice_sub: "", btn_body: "Body Language", btn_body_sub: "",
-      btn_impromptu: "Impromptu & Q&A", btn_impromptu_sub: "", btn_feedback: "Getting Feedback", btn_feedback_sub: "",
+      btn_anxiety: "Страх / Волнение", btn_anxiety_sub: "", btn_structure: "Логическая структура", btn_structure_sub: "",
+      btn_voice: "Контроль голоса", btn_voice_sub: "", btn_body: "Язык тела", btn_body_sub: "",
+      btn_impromptu: "Импровизация и Q&A", btn_impromptu_sub: "", btn_feedback: "Обратная связь", btn_feedback_sub: "",
       res_title: "Библиотека ресурсов", btn_show: "Показать ссылки", res1_title: "Анализ", res2_title: "Шаблоны", res3_title: "Сообщества", res4_title: "AI-инструменты",
       footer_text: "Public Speech Improvement Navigator — исследовательский проект ТюмГУ.",
-      read_article: "Читать статью на Google Scholar", watch_and_learn: "Смотрите и учитесь"
+      read_article: "Читать статью на Google Scholar", watch_and_learn: "Смотрите и учитесь",
+      feedback_title: "Оставьте свой отзыв", feedback_sub: "Поделитесь своими мыслями, советами или личным опытом в публичных выступлениях.",
+      feedback_name_label: "Имя", feedback_comment_label: "Комментарий", feedback_submit: "Отправить отзыв",
+      feedback_recent: "Последние комментарии", feedback_success: "Спасибо за ваш отзыв!"
     }
   };
 
@@ -524,7 +573,6 @@
     renderNavigatorContent(currentTopic);
   }
 
-  // ИЗМЕНЕНО: Добавлена генерация списка видео
   function renderNavigatorContent(topic) {
     currentTopic = topic;
     const data = navigatorData[currentLang][topic];
@@ -617,6 +665,61 @@
   const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
   const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, observerOptions);
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(text));
+    return div.innerHTML;
+  }
+
+  function showToast(message) {
+    const existingToast = document.querySelector('.toast-notification');
+    if(existingToast) existingToast.remove();
+
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 400);
+    }, 3000);
+  }
+
+  const feedbackForm = document.getElementById('feedbackForm');
+  const commentsList = document.getElementById('commentsList');
+
+  feedbackForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nameInput = document.getElementById('fbName');
+    const commentInput = document.getElementById('fbComment');
+    
+    const name = nameInput.value.trim();
+    const comment = commentInput.value.trim();
+    
+    if(name && comment) {
+      const today = new Date();
+      const dateStr = today.toISOString().split('T')[0]; 
+      
+      const commentDiv = document.createElement('div');
+      commentDiv.className = 'comment-item';
+      commentDiv.innerHTML = `
+        <div class="comment-meta">
+          <strong style="color: var(--accent);">${escapeHtml(name)}</strong>
+          <small style="color: var(--text-muted);">${dateStr}</small>
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text-main); line-height: 1.5;">${escapeHtml(comment)}</p>
+      `;
+      
+      commentsList.prepend(commentDiv);
+      
+      feedbackForm.reset();
+      showToast(translations[currentLang].feedback_success);
+    }
+  });
 
   setLanguage('en');
 </script>
